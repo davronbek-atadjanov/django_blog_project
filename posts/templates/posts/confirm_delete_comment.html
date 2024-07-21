@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} Confirm Delete Comment {% endblock %}
+
+{% block content %}
+<div class="container">
+<h2>Confirm Delete Comment Page</h2>
+
+    <p>
+        <b>Post: </b> {{ post.title }}
+    </p>
+    <p>
+        <b>Comment body:  </b> {{ comment.body | truncatewords:25}}
+    </p>
+
+    <a href="{% url "posts:delete_comment" post.id comment.id%}" class="btn btn-outline-danger">Yes</a>
+    <a href="{% url "posts:post_detail" post.id %}" class="btn btn-outline-success">No</a>
+</div>
+{% endblock %}

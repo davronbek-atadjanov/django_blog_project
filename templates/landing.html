@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Landing Page {% endblock title %}
+
+{% block content %}
+
+<div class="m-5">
+<h2 class="ms-5">Eng yangi postlar</h2>
+    <div class="row mt-4 ms-4">
+        {% for post in new_posts %}
+            <div class="card ms-3" style="width: 18rem;">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                  <div><i class="bi bi-eye"></i>{{ post.hit_count }}</div>
+                  <p class="card-text">{{ post.body | truncatewords:10 }}... <a href="{% url "posts:post_detail" post.id %}">batafsil bu yerda</a></p>
+
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+    <div class="m-5">
+<h2 class="ms-5">Eng ko'p ko'rilgan postlar</h2>
+    <div class="row mt-4 ms-4">
+        {% for post in popular_posts %}
+            <div class="card ms-3" style="width: 18rem;">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                  <div><i class="bi bi-eye"></i>{{ post.hit_count }}</div>
+                  <p class="card-text">{{ post.body | truncatewords:10 }}... <a href="{% url "posts:post_detail" post.id %}">batafsil bu yerda</a></p>
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>    
+    <div class="m-5">
+<h2 class="ms-5">Haftaning eng ommabop postlari</h2>
+    <div class="row mt-4 ms-4">
+        {% for post in week_posts %}
+            <div class="card ms-3" style="width: 18rem;">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <div><i class="bi bi-eye"></i>{{ post.hit_count }}</div>
+
+                  <p class="card-text">{{ post.body | truncatewords:10 }}... <a href="{% url "posts:post_detail" post.id %}">batafsil bu yerda</a></p>
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>   
+    <div class="m-5">
+<h2 class="ms-5">Oyning eng ommabop postlari</h2>
+    <div class="row mt-4 ms-4">
+        {% for post in month_posts %}
+            <div class="card ms-3" style="width: 18rem;">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>                   
+                  <div><i class="bi bi-eye"></i>{{ post.hit_count }}</div>
+
+                  <p class="card-text">{{ post.body | truncatewords:10 }}... <a href="{% url "posts:post_detail" post.id %}">batafsil bu yerda</a></p>
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>    
+    <div class="m-5">
+<h2 class="ms-5">Tavsiya qilinadigan postlar</h2>
+    <div class="row mt-4 ms-4">
+        {% for post in recommended_posts %}
+            <div class="card ms-3" style="width: 18rem;">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>                  
+                  <div><i class="bi bi-eye"></i>{{ post.hit_count }}</div>
+
+                  <p class="card-text">{{ post.body | truncatewords:10 }}... <a href="{% url "posts:post_detail" post.id %}">batafsil bu yerda</a></p>
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

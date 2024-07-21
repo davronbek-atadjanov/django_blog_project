@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title  %}
+Comment edit
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>Comment Edit</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form | crispy }}
+                    <button type="submit" class="btn btn-outline-secondary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}>

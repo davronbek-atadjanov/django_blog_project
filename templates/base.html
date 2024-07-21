@@ -1,0 +1,87 @@
+{% load static %}
+{% url "posts:latest_posts" as latest_post_url %}
+{% url "posts:week_posts" as week_post_url %}
+{% url "posts:month_posts" as month_post_url %}
+{% url "posts:post_list" as post_list_url %}
+{% url "posts:recommended_posts" as recommended_post_url %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Django Blog project</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    </head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url "landing_page" %}">Django blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link {% if request.path == post_list_url %} active {% endif %}" href="{% url "posts:post_list" %}">All posts</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == latest_post_url %} active {% endif %}" aria-current="page" href="{% url "posts:latest_posts" %}">New posts</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == week_post_url %} active {% endif %}" aria-current="page" href="{% url "posts:week_posts" %}">Week posts</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == month_post_url %} active {% endif %}" aria-current="page" href="{% url "posts:month_posts" %}">Month posts</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == recommended_post_url %} active {% endif %}" aria-current="page" href="{% url "posts:recommended_posts" %}">Recommended posts</a></li>
+                <div class="dropdown">
+                     <button class="btn btn-outline-dark dropdown-toggle active" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bo'lim
+                     </button>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a href="{% url "posts:python_posts" %}" class="dropdown-item">Python</a></li>
+                    <li><a href="{% url "posts:csharp_posts" %}" class="dropdown-item">C#</a></li>
+                    <li><a href="{% url "posts:javascript_posts" %}" class="dropdown-item">JavaScripts</a></li>
+                    <li><a href="{% url "posts:rust_posts" %}" class="dropdown-item">Rust</a></li>
+                    <li><a href="{% url "posts:cplusplus_posts" %}" class="dropdown-item">C++</a></li>
+                  </ul>
+                </div>
+            </ul>
+            <div class="me-4 ms-auto">
+                {% if request.user.is_authenticated %}
+                    <div class="dropdown">
+                      <button class="btn btn-outline-dark dropdown-toggle active" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ request.user.username }}
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url "posts:post_create" %}">Yangi post qo'shish</a></li>
+                        <li><a class="dropdown-item" href="{% url "users:password_change" %}">Password change</a></li>
+                          <li><a class="dropdown-item" href="{% url "users:logout" %}">LogOut</a></li>
+                      </ul>
+                    </div>
+                {% else %}
+                    <a class="btn btn-outline-light" href="{% url "users:login" %}">Login</a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+</nav>
+<diV class="container">
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+    {% endif %}
+</div>
+
+{#<div class="container mt-5">#}
+{% block content %}
+
+
+{% endblock %}
+
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

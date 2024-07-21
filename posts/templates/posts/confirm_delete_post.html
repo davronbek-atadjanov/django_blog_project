@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} Confirm Delete Post {% endblock %}
+
+{% block content %}
+<div class="container">
+<h2>Confirm Delete Post Page</h2>
+
+    <p>
+        <b>Book: </b> {{ post.title }}
+    </p>
+    <p>
+        <b>Post body:  </b> {{ post.body | truncatewords:25}}
+    </p>
+
+    <a href="{% url "posts:delete_post" post.id %}" class="btn btn-outline-danger">Yes</a>
+    <a href="{% url "posts:post_detail" post.id %}" class="btn btn-outline-success">No</a>
+</div>
+{% endblock %}
